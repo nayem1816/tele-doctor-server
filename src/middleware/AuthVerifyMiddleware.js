@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: '../../config.env' });
 
 module.exports = (req, res, next) => {
     let token = req.headers['token-key'];
 
-    jwt.verify(token, 'secretKey2022', (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY_JWT, (err, decoded) => {
         if (err) {
             res.status(400).json({ status: 'authorized', data: err });
         } else {
-            let UserName = decoded['data']['UserName'];
-            req.headers.UserName = UserName;
+            let EmailAddress = decoded['data']['EmailAddress'];
+            req.headers.EmailAddress = EmailAddress;
             next();
         }
     });

@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('./src/routes/api');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv').config({ path: './config.env' });
 
 const app = new express();
 
@@ -31,14 +32,10 @@ app.use(limiter);
 app.use(bodyParser.json());
 
 //Mongodb Connect by mongoose
-const URI = `mongodb+srv://teleDoctorUU:MKI9oEKRtE0717AQ@cluster0.zahaffc.mongodb.net/?retryWrites=true&w=majority`;
-const OPTION = {
-    // useNewUrlParser: true,
-    // useFindAndModify: false,
-    // useUnifiedTopology: true,
-};
-mongoose.connect(URI, OPTION, (err) => {
+const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER_NAME}.${process.env.DB_HOSTNAME}.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+mongoose.connect(URI, (err) => {
     if (err) {
+        console.log('Error in connecting to database......');
         console.log(err);
     } else {
         console.log('Database connected successful');
