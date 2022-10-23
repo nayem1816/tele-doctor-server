@@ -3,6 +3,7 @@ const router = require('./src/routes/api');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config({ path: './config.env' });
+const chalk = require('chalk');
 
 const app = new express();
 
@@ -38,7 +39,7 @@ mongoose.connect(URI, (err) => {
         console.log('Error in connecting to database......');
         console.log(err);
     } else {
-        console.log('Database connected successful');
+        console.log(chalk.cyanBright('Database connected successful'));
     }
 });
 
