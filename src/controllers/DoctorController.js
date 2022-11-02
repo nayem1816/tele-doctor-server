@@ -33,8 +33,6 @@ exports.CreateDoctor = (req, res) => {
         totalPatient: totalPatient,
     };
 
-    console.log(doctorData);
-
     DoctorModel.create(doctorData, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
@@ -46,6 +44,29 @@ exports.CreateDoctor = (req, res) => {
 
 exports.ReadDoctors = (req, res) => {
     DoctorModel.find({}, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.DeleteDoctor = (req, res) => {
+    DoctorModel.findByIdAndDelete(req.body.id, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.FindRecentDoctor = (req, res) => {
+    const specialization = req.query.specialist;
+    console.log(specialization);
+
+    DoctorModel.find({ specialization: specialization }, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
         } else {
