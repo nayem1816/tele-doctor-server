@@ -6,9 +6,12 @@ const DataSchema = mongoose.Schema(
         title: { type: String },
         description: { type: String },
         image: { type: String },
-        category: { type: String },
-        createdAt: { type: String },
-        updatedAt: { type: String },
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, default: Date.now },
     },
     { versionKey: false }
 );
+
+const BlogModel = mongoose.model('blogs', DataSchema);
+
+module.exports = BlogModel;

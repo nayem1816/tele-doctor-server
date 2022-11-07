@@ -35,7 +35,7 @@ const DoctorSchema = mongoose.Schema(
                 'Friday',
             ],
         },
-        availableTime: { type: String, default: '24 hours' },
+        consultationTime: { type: String, default: '24 hours' },
         activeStatus: { type: String, default: '' },
         rating: { type: Number, default: null },
         totalReview: { type: Number, default: null },

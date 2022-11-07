@@ -41,7 +41,6 @@ exports.UpdateRecentDisease = (req, res) => {
 
 exports.DeleteRecentDisease = (req, res) => {
     let reqBody = req.body;
-    console.log(reqBody);
 
     RecentDiseaseModel.findByIdAndDelete(reqBody.id, (err, data) => {
         if (err) {

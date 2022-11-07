@@ -22,6 +22,7 @@ exports.CreateDoctor = (req, res) => {
         experience: reqBody.experience,
         registrationNumber: reqBody.registrationNumber,
         fees: reqBody.fees,
+        workingAt: reqBody.workingAt,
         communication: reqBody.communication,
         verifiedStatus: verifiedStatus,
         createdAt: reqBody.createdAt,
@@ -64,9 +65,20 @@ exports.DeleteDoctor = (req, res) => {
 
 exports.FindRecentDoctor = (req, res) => {
     const specialization = req.query.specialist;
-    console.log(specialization);
 
     DoctorModel.find({ specialization: specialization }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.ReadDoctorById = (req, res) => {
+    const id = req.params.id;
+
+    DoctorModel.findById(id, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
         } else {
