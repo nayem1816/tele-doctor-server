@@ -6,6 +6,7 @@ const NurseController = require('../controllers/NurseController');
 const CategoriesController = require('../controllers/CategoriesController');
 const RecentDiseaseController = require('../controllers/RecentDiseasesController');
 const BlogController = require('../controllers/BlogController');
+const Appointment = require('../controllers/DoctorBookingController');
 
 const router = express.Router();
 
@@ -20,6 +21,10 @@ router.get('/ReadDoctors', DoctorController.ReadDoctors);
 router.post('/DeleteDoctor', DoctorController.DeleteDoctor);
 router.get('/FindRecentDoctor', DoctorController.FindRecentDoctor);
 router.get('/ReadDoctorById/:id', DoctorController.ReadDoctorById);
+router.post('/updateVerifiedStatus', DoctorController.updateVerifiedStatus);
+router.get('/VerifiedDoctors', DoctorController.VerifiedDoctors);
+router.get('/NotVerifiedDoctors', DoctorController.NotVerifiedDoctors);
+router.get('/FindDoctorByLocation', DoctorController.FindDoctorByLocation);
 
 // NURSE ROUTES--------------------------------------------------------
 router.post('/CreateNurse', NurseController.CreateNurse);
@@ -53,5 +58,15 @@ router.post('/CreateBlog', BlogController.CreateBlog);
 router.get('/ReadBlogs', BlogController.ReadBlogs);
 router.post('/UpdateBlog', BlogController.UpdateBlog);
 router.post('/DeleteBlog', BlogController.DeleteBlog);
+
+// APPOINTMENT ROUTES------------------------------------------------------------
+router.post('/CreateAppointment', Appointment.CreateAppointment);
+router.get('/ReadAppointments', Appointment.ReadAppointments);
+router.post('/DeleteAppointment', Appointment.DeleteAppointment);
+router.post('/SentAppointmentMessage', Appointment.SentAppointmentMessage);
+router.get(
+    '/ReadAppointmentByEmail/:email',
+    Appointment.ReadAppointmentByEmail
+);
 
 module.exports = router;

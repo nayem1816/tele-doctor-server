@@ -3,10 +3,15 @@ const DoctorModel = require('../models/DoctorModel');
 exports.CreateDoctor = (req, res) => {
     let reqBody = req.body;
     const verifiedStatus = 'not-verified';
-    const activeStatus = 'not-active';
-    const rating = null;
-    const totalReview = null;
-    const totalPatient = null;
+
+    const active = ['active', 'not-active'];
+    let randActive = active[(Math.random() * active.length) | 0];
+
+    const ratings = Math.floor(Math.random() * 5);
+
+    const reviews = Math.floor(Math.random() * 1000);
+
+    const patients = Math.floor(Math.random() * 100);
 
     const doctorData = {
         name: reqBody.name,
@@ -15,6 +20,7 @@ exports.CreateDoctor = (req, res) => {
         profilePic: reqBody.profilePic,
         DOB: reqBody.DOB,
         gender: reqBody.gender,
+        district: reqBody.district,
         address: reqBody.address,
         specialization: reqBody.specialization,
         profileDesc: reqBody.profileDesc,
@@ -28,10 +34,10 @@ exports.CreateDoctor = (req, res) => {
         createdAt: reqBody.createdAt,
         availableDays: reqBody.availableDays,
         consultationTime: reqBody.consultationTime,
-        activeStatus: activeStatus,
-        rating: rating,
-        totalReview: totalReview,
-        totalPatient: totalPatient,
+        activeStatus: randActive,
+        rating: ratings,
+        totalReview: reviews,
+        totalPatient: patients,
     };
 
     DoctorModel.create(doctorData, (err, data) => {
@@ -79,6 +85,54 @@ exports.ReadDoctorById = (req, res) => {
     const id = req.params.id;
 
     DoctorModel.findById(id, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.updateVerifiedStatus = (req, res) => {
+    const id = req.body.id;
+
+    DoctorModel.findByIdAndUpdate(
+        id,
+        { verifiedStatus: req.body.verifiedStatus },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ status: 'fail', data: err });
+            } else {
+                res.status(200).json({ status: 'success', data: data });
+            }
+        }
+    );
+};
+
+exports.VerifiedDoctors = (req, res) => {
+    DoctorModel.find({ verifiedStatus: 'verified' }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.NotVerifiedDoctors = (req, res) => {
+    DoctorModel.find({ verifiedStatus: 'not-verified' }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.FindDoctorByLocation = (req, res) => {
+    const location = req.query.location;
+
+    DoctorModel.find({ district: location }, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
         } else {
