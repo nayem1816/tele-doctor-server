@@ -63,7 +63,6 @@ exports.DeleteNurse = (req, res) => {
 
 exports.ReadNurseById = (req, res) => {
     const id = req.params.id;
-    console.log(id);
 
     NurseModel.findById(req.params.id, (err, data) => {
         if (err) {

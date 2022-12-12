@@ -25,6 +25,7 @@ router.post('/updateVerifiedStatus', DoctorController.updateVerifiedStatus);
 router.get('/VerifiedDoctors', DoctorController.VerifiedDoctors);
 router.get('/NotVerifiedDoctors', DoctorController.NotVerifiedDoctors);
 router.get('/FindDoctorByLocation', DoctorController.FindDoctorByLocation);
+router.get('/AvailableDoctor', DoctorController.AvailableDoctor);
 
 // NURSE ROUTES--------------------------------------------------------
 router.post('/CreateNurse', NurseController.CreateNurse);
