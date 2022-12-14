@@ -7,6 +7,7 @@ const CategoriesController = require('../controllers/CategoriesController');
 const RecentDiseaseController = require('../controllers/RecentDiseasesController');
 const BlogController = require('../controllers/BlogController');
 const Appointment = require('../controllers/DoctorBookingController');
+const Prescription = require('../controllers/PrescriptionController');
 
 const router = express.Router();
 
@@ -69,5 +70,12 @@ router.get(
     '/ReadAppointmentByEmail/:email',
     Appointment.ReadAppointmentByEmail
 );
+router.get('/ReadAppointmentById/:id', Appointment.ReadAppointmentById);
+
+// Prescription ROUTES------------------------------------------------------------
+router.post('/CreatePrescription', Prescription.CreatePrescription);
+router.get('/ReadPrescriptions', Prescription.ReadPrescriptions);
+router.post('/DeletePrescription', Prescription.DeletePrescription);
+router.get('/ReadPrescriptionById/:id', Prescription.ReadPrescriptionById);
 
 module.exports = router;

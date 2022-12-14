@@ -50,7 +50,7 @@ exports.CreateDoctor = (req, res) => {
 };
 
 exports.ReadDoctors = (req, res) => {
-    DoctorModel.find({}, (err, data) => {
+    DoctorModel.find({ verifiedStatus: 'verified' }, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
         } else {

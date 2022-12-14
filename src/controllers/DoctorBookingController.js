@@ -78,3 +78,13 @@ exports.ReadAppointmentByEmail = (req, res) => {
         }
     });
 };
+
+exports.ReadAppointmentById = (req, res) => {
+    DoctorBookingModel.findById(req.params.id, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
