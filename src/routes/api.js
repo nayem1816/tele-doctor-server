@@ -8,6 +8,7 @@ const RecentDiseaseController = require('../controllers/RecentDiseasesController
 const BlogController = require('../controllers/BlogController');
 const Appointment = require('../controllers/DoctorBookingController');
 const Prescription = require('../controllers/PrescriptionController');
+const QuesAndAns = require('../controllers/QuesAndAnsController');
 
 const router = express.Router();
 
@@ -77,5 +78,15 @@ router.post('/CreatePrescription', Prescription.CreatePrescription);
 router.get('/ReadPrescriptions', Prescription.ReadPrescriptions);
 router.post('/DeletePrescription', Prescription.DeletePrescription);
 router.get('/ReadPrescriptionById/:id', Prescription.ReadPrescriptionById);
+router.get(
+    '/ReadPrescriptionByEmail/:email',
+    Prescription.ReadPrescriptionByEmail
+);
+
+// QuesAndAns ROUTES------------------------------------------------------------
+router.post('/CreateQuesAndAns', QuesAndAns.CreateQuesAndAns);
+router.get('/ReadQuesAndAns', QuesAndAns.ReadQuesAndAns);
+router.post('/DeleteQuesAndAns', QuesAndAns.DeleteQuesAndAns);
+router.get('/ReadQuesAndAnsById/:id', QuesAndAns.ReadQuesAndAnsById);
 
 module.exports = router;

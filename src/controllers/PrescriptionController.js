@@ -51,3 +51,14 @@ exports.ReadPrescriptionById = (req, res) => {
         }
     });
 };
+
+exports.ReadPrescriptionByEmail = (req, res) => {
+    const email = req.params.email;
+    PrescriptionModel.find({ 'appointment.userEmail': email }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
