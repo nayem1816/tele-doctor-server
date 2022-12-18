@@ -50,3 +50,77 @@ exports.ReadProfiles = (req, res) => {
         }
     });
 };
+
+exports.UpdateProfile = (req, res) => {
+    const id = req.body.id;
+    const data = {
+        MobileNumber: req.body.phone,
+        Address: req.body.address,
+        DateOfBirth: req.body.dateOfBirth,
+    };
+
+    ProfileModel.findByIdAndUpdate(id, data, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+// read profile by id
+exports.ReadProfileByEmail = (req, res) => {
+    let EmailAddress = req.params['email'];
+
+    ProfileModel.find({ EmailAddress: EmailAddress }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
+exports.UpdateRoleUsingEmail = (req, res) => {
+    const EmailAddress = req.body.email;
+    const role = req.body.role;
+
+    ProfileModel.findOneAndUpdate(
+        { EmailAddress: EmailAddress },
+        { role: role },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ status: 'fail', data: err });
+            } else {
+                res.status(200).json({ status: 'success', data: data });
+            }
+        }
+    );
+};
+
+exports.CreateAdminUsingEmail = (req, res) => {
+    const EmailAddress = req.body.email;
+    const admin = 'admin';
+
+    ProfileModel.findOneAndUpdate(
+        { EmailAddress: EmailAddress },
+        { admin: admin },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ status: 'fail', data: err });
+            } else {
+                res.status(200).json({ status: 'success', data: data });
+            }
+        }
+    );
+};
+
+exports.ReadAdmin = (req, res) => {
+    ProfileModel.find({ admin: 'admin' }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};

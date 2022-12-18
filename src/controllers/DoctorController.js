@@ -38,6 +38,7 @@ exports.CreateDoctor = (req, res) => {
         rating: ratings,
         totalReview: reviews,
         totalPatient: patients,
+        userInfo: reqBody.userInfo,
     };
 
     DoctorModel.create(doctorData, (err, data) => {

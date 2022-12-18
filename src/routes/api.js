@@ -1,5 +1,5 @@
 const express = require('express');
-const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
+// const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
 const ProfileController = require('../controllers/ProfileController');
 const DoctorController = require('../controllers/DoctorController');
 const NurseController = require('../controllers/NurseController');
@@ -9,6 +9,7 @@ const BlogController = require('../controllers/BlogController');
 const Appointment = require('../controllers/DoctorBookingController');
 const Prescription = require('../controllers/PrescriptionController');
 const QuesAndAns = require('../controllers/QuesAndAnsController');
+// const AdminController = require('../controllers/AdminController');
 
 const router = express.Router();
 
@@ -16,6 +17,15 @@ const router = express.Router();
 router.post('/CreateProfile', ProfileController.CreateProfile);
 router.post('/UserLogin', ProfileController.UserLogin);
 router.get('/ReadProfiles', ProfileController.ReadProfiles);
+router.post('/UpdateProfile', ProfileController.UpdateProfile);
+router.get('/ReadProfileByEmail/:email', ProfileController.ReadProfileByEmail);
+router.post('/UpdateRoleUsingEmail', ProfileController.UpdateRoleUsingEmail);
+router.post('/CreateAdminUsingEmail', ProfileController.CreateAdminUsingEmail);
+router.get('/ReadAdmin', ProfileController.ReadAdmin);
+
+// ADMIN ROUTES--------------------------------------------------------
+// router.post('/CreateAdmin', AdminController.CreateAdmin);
+// router.get('/ReadAdmins', AdminController.ReadAdmins);
 
 // DOCTOR ROUTES--------------------------------------------------------
 router.post('/CreateDoctor', DoctorController.CreateDoctor);
@@ -71,6 +81,10 @@ router.get(
     '/ReadAppointmentByEmail/:email',
     Appointment.ReadAppointmentByEmail
 );
+router.get(
+    '/ReadAppointmentDoctorByEmail/:email',
+    Appointment.ReadAppointmentDoctorByEmail
+);
 router.get('/ReadAppointmentById/:id', Appointment.ReadAppointmentById);
 
 // Prescription ROUTES------------------------------------------------------------
@@ -81,6 +95,10 @@ router.get('/ReadPrescriptionById/:id', Prescription.ReadPrescriptionById);
 router.get(
     '/ReadPrescriptionByEmail/:email',
     Prescription.ReadPrescriptionByEmail
+);
+router.get(
+    '/ReadPrescriptionDoctorByEmail/:email',
+    Prescription.ReadPrescriptionDoctorByEmail
 );
 
 // QuesAndAns ROUTES------------------------------------------------------------

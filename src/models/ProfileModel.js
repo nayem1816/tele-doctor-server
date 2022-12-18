@@ -8,6 +8,8 @@ const DataSchema = mongoose.Schema(
         Address: { type: String, default: null },
         DateOfBirth: { type: String, default: null },
         Gender: { type: String, default: null },
+        role: { type: String, default: 'user' },
+        admin: { type: String, default: '' },
     },
     { versionKey: false }
 );

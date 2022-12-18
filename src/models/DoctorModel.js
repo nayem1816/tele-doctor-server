@@ -41,6 +41,7 @@ const DoctorSchema = mongoose.Schema(
         rating: { type: Number, default: null },
         totalReview: { type: Number, default: null },
         totalPatient: { type: Number, default: null },
+        userInfo: { type: Object, default: null },
     },
     { versionKey: false }
 );
