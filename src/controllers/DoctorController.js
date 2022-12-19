@@ -94,6 +94,18 @@ exports.ReadDoctorById = (req, res) => {
     });
 };
 
+exports.ReadDoctorByEmail = (req, res) => {
+    const email = req.params.email;
+
+    DoctorModel.find({ 'userInfo.email': email }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};
+
 exports.updateVerifiedStatus = (req, res) => {
     const id = req.body.id;
 
@@ -150,4 +162,31 @@ exports.AvailableDoctor = (req, res) => {
             res.status(200).json({ status: 'success', data: data });
         }
     });
+};
+
+exports.AddReviewUsingEmail = (req, res) => {
+    const email = req.body.doctorEmail;
+
+    DoctorModel.findOneAndUpdate(
+        { 'userInfo.email': email },
+        {
+            $push: {
+                reviews: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    userImg: req.body.userImg,
+                    rating: req.body.rating,
+                    review: req.body.review,
+                    createAt: req.body.createAt,
+                },
+            },
+        },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ status: 'fail', data: err });
+            } else {
+                res.status(200).json({ status: 'success', data: data });
+            }
+        }
+    );
 };

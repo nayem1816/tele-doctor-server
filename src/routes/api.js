@@ -9,6 +9,7 @@ const BlogController = require('../controllers/BlogController');
 const Appointment = require('../controllers/DoctorBookingController');
 const Prescription = require('../controllers/PrescriptionController');
 const QuesAndAns = require('../controllers/QuesAndAnsController');
+const ApplicationReviewController = require('../controllers/ApplicationReviewController');
 // const AdminController = require('../controllers/AdminController');
 
 const router = express.Router();
@@ -33,11 +34,13 @@ router.get('/ReadDoctors', DoctorController.ReadDoctors);
 router.post('/DeleteDoctor', DoctorController.DeleteDoctor);
 router.get('/FindRecentDoctor', DoctorController.FindRecentDoctor);
 router.get('/ReadDoctorById/:id', DoctorController.ReadDoctorById);
+router.get('/ReadDoctorByEmail/:email', DoctorController.ReadDoctorByEmail);
 router.post('/updateVerifiedStatus', DoctorController.updateVerifiedStatus);
 router.get('/VerifiedDoctors', DoctorController.VerifiedDoctors);
 router.get('/NotVerifiedDoctors', DoctorController.NotVerifiedDoctors);
 router.get('/FindDoctorByLocation', DoctorController.FindDoctorByLocation);
 router.get('/AvailableDoctor', DoctorController.AvailableDoctor);
+router.post('/AddReviewUsingEmail', DoctorController.AddReviewUsingEmail);
 
 // NURSE ROUTES--------------------------------------------------------
 router.post('/CreateNurse', NurseController.CreateNurse);
@@ -106,5 +109,15 @@ router.post('/CreateQuesAndAns', QuesAndAns.CreateQuesAndAns);
 router.get('/ReadQuesAndAns', QuesAndAns.ReadQuesAndAns);
 router.post('/DeleteQuesAndAns', QuesAndAns.DeleteQuesAndAns);
 router.get('/ReadQuesAndAnsById/:id', QuesAndAns.ReadQuesAndAnsById);
+
+// Application Reviews ROUTES-----------------------------------------------------
+router.post(
+    '/CreateApplicationReview',
+    ApplicationReviewController.CreateApplicationReview
+);
+router.get(
+    '/ReadApplicationReviews',
+    ApplicationReviewController.ReadApplicationReviews
+);
 
 module.exports = router;

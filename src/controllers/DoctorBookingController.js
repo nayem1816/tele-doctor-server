@@ -34,7 +34,6 @@ exports.DeleteAppointment = (req, res) => {
 
 exports.SentAppointmentMessage = (req, res) => {
     let reqBody = req.body;
-    console.log(reqBody);
     let date =
         new Date().getFullYear() +
         '-' +
