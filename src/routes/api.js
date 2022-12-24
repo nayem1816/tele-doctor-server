@@ -10,6 +10,8 @@ const Appointment = require('../controllers/DoctorBookingController');
 const Prescription = require('../controllers/PrescriptionController');
 const QuesAndAns = require('../controllers/QuesAndAnsController');
 const ApplicationReviewController = require('../controllers/ApplicationReviewController');
+const SocialMediaController = require('../controllers/SocialMediaController');
+const SocialMediaPageController = require('../controllers/SocialMediaPageController');
 // const AdminController = require('../controllers/AdminController');
 
 const router = express.Router();
@@ -119,5 +121,23 @@ router.get(
     '/ReadApplicationReviews',
     ApplicationReviewController.ReadApplicationReviews
 );
+
+// Social Media ROUTES------------------------------------------------------------
+router.post('/CreatePost', SocialMediaController.CreatePost);
+router.get('/ReadPosts', SocialMediaController.ReadPosts);
+router.post('/DeletePost', SocialMediaController.DeletePost);
+router.post('/AddComment', SocialMediaController.AddComment);
+router.post('/AddLike', SocialMediaController.AddLike);
+router.get('/ReadPostByEmail/:email', SocialMediaController.ReadPostByEmail);
+
+// Social Media Page ROUTES------------------------------------------------------------
+router.post('/CreatePage', SocialMediaPageController.CreatePage);
+router.get('/ReadPages', SocialMediaPageController.ReadPages);
+router.get(
+    '/ReadPageByEmail/:email',
+    SocialMediaPageController.ReadPageByEmail
+);
+// router.post('/AddPageComment', SocialMediaPageController.AddPageComment);
+// router.post('/AddPageLike', SocialMediaPageController.AddPageLike);
 
 module.exports = router;
